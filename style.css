@@ -30,6 +30,9 @@
   /* Section spacing (Figma) */
   --sec-pt: 96px;
   --sec-pb: 132px;
+  --label-size: 22px;
+  --label-media-gap: 250px;
+  --accent-blue: #93B6D7;
 
   /* Fonts */
   --font-ja: 'Sawarabi Mincho', serif;
@@ -89,16 +92,20 @@ a {
   margin-bottom: 8px;
   color: rgba(255, 255, 255, 0.88);
   font-family: var(--font-ja);
-  font-size: 18px;
+  font-size: 20px;
   font-weight: 300;
   letter-spacing: 0.08em;
   line-height: 1.65;
 }
 
+.sidebar__title-ja {
+  display: inline;
+}
+
 .sidebar__subtitle {
   color: var(--text-muted);
   font-family: var(--font-en);
-  font-size: 9px;
+  font-size: 16px;
   font-weight: 300;
   letter-spacing: 0.24em;
   line-height: 1.5;
@@ -118,7 +125,7 @@ a {
   padding-bottom: 4px;
   color: var(--text-muted);
   font-family: var(--font-en);
-  font-size: 12px;
+  font-size: 16px;
   font-weight: 300;
   letter-spacing: 0.16em;
   text-transform: uppercase;
@@ -218,19 +225,16 @@ a {
 }
 
 .section__label {
-  margin-bottom: 40px;
+  margin-bottom: var(--label-media-gap);
   padding: 0 var(--pad-x);
   color: rgba(255, 255, 255, 0.82);
   font-family: var(--font-en);
-  font-size: 12px;
+  font-size: var(--label-size);
   font-style: italic;
   font-weight: 300;
   letter-spacing: 0.18em;
-  text-transform: uppercase;
-}
-
-.section__label--center {
   text-align: center;
+  text-transform: uppercase;
 }
 
 .section__pad {
@@ -242,7 +246,7 @@ a {
   margin-bottom: 18px;
   color: rgba(255, 255, 255, 0.92);
   font-family: var(--font-ja);
-  font-size: 32px;
+  font-size: 25px;
   font-weight: 400;
   letter-spacing: 0.05em;
   line-height: 1.6;
@@ -250,12 +254,12 @@ a {
 
 .copy p {
   color: var(--text-soft);
-  font-size: 12px;
+  font-size: 15px;
   letter-spacing: 0.05em;
   line-height: 2.1;
 }
 
-.copy p + p {
+.copy p+p {
   margin-top: 4px;
 }
 
@@ -286,23 +290,36 @@ a {
 }
 
 /* ── 01 Why INAGE ──
-   Text 380px | gap 42px | Image 734×439px, align end */
-.layout-01 {
-  display: grid;
-  grid-template-columns: 380px 1fr;
-  gap: 42px;
-  align-items: end;
+   Figma: label → 424px → img 1000×563 @ x600
+   copy @ x407 — h2 28px #93B6D7, body 20px */
+.frame--01 {
+  width: min(800px, 100%);
+  margin-left: auto;
+  margin-right: 0;
+  margin-bottom: 33px;
+  aspect-ratio: 1000 / 563;
+  height: auto;
 }
 
 .copy--01 {
-  width: 380px;
-  max-width: 100%;
-  padding-bottom: 10px;
+  padding-left: 11px;
+  max-width: 560px;
 }
 
-.frame--01 {
-  width: 100%;
-  height: 439px;
+.copy--01 h2 {
+  margin-bottom: 12px;
+  color: var(--accent-blue);
+  font-size: 25px;
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  line-height: 1.6;
+}
+
+.copy--01 p {
+  color: var(--text-soft);
+  font-size: 15px;
+  letter-spacing: 0.05em;
+  line-height: 2;
 }
 
 /* ── 02 Gourmet ──
@@ -417,12 +434,12 @@ a {
   max-width: 720px;
   margin-left: auto;
   margin-right: auto;
-  font-size: 12px;
+  font-size: 15px;
   letter-spacing: 0.05em;
   line-height: 2.15;
 }
 
-.beach-hero__copy p + p {
+.beach-hero__copy p+p {
   margin-top: 0;
 }
 
@@ -586,9 +603,29 @@ a {
 }
 
 .bleed--05-bottom {
-  width: 1000px;
+  position: relative;
+  width: min(800px, calc(100% - var(--pad-x) * 2));
   height: 351px;
-  margin-top: 34px;
+  margin: 34px auto 0;
+}
+
+.bleed--05-bottom img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.fujisan-caption {
+  position: absolute;
+  right: 18px;
+  bottom: 16px;
+  z-index: 2;
+  color: rgba(255, 255, 255, 0.92);
+  font-size: 15px;
+  letter-spacing: 0.08em;
+  line-height: 1.5;
+  text-align: right;
+  text-shadow: 0 1px 10px rgba(0, 0, 0, 0.72);
 }
 
 /* ── 06 Onsen ──
@@ -735,11 +772,12 @@ a {
 
 .facts-07 p {
   color: rgba(255, 255, 255, 0.72);
-  font-size: 12px;
+  font-size: 15px;
   line-height: 2;
 }
 
 .footer {
+  margin-top: 90px;
   color: rgba(255, 255, 255, 0.52);
   font-family: var(--font-en);
   font-size: 11px;
@@ -769,7 +807,7 @@ a {
     padding: 14px 18px;
     border-right: 0;
     border-bottom: 1px solid var(--line);
-    background: rgba(0, 19, 40, 0.95);
+    background: rgba(0, 19, 40, 0.5);
   }
 
   .sidebar__title {
@@ -778,7 +816,10 @@ a {
   }
 
   .sidebar__subtitle {
-    display: none;
+    display: block;
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    line-height: 1.3;
   }
 
   .sidebar__toggle {
@@ -825,7 +866,7 @@ a {
     z-index: 210;
     margin-top: 0;
     padding: 16px 18px 24px;
-    background: rgba(0, 19, 40, 0.97);
+    background: rgba(0, 19, 40, 0.5);
   }
 
   .sidebar__nav.is-open {
@@ -836,7 +877,7 @@ a {
     width: 100%;
     padding: 12px 0;
     border-bottom: 1px solid var(--line);
-    font-size: 13px;
+    font-size: 18px;
   }
 
   .main {
@@ -851,7 +892,6 @@ a {
     max-width: none;
   }
 
-  .layout-01,
   .layout-02,
   .layout-05,
   .facts-07 {
@@ -919,13 +959,28 @@ a {
     min-height: 180px;
   }
 
-  .copy--01 {
-    width: 100%;
+  .section__label {
+    margin-bottom: var(--label-media-gap);
+    font-size: 18px;
   }
 
   .frame--01 {
-    height: auto;
-    aspect-ratio: 16 / 9;
+    width: 100%;
+    margin-left: 0;
+    margin-bottom: 28px;
+  }
+
+  .copy--01 {
+    padding-left: 0;
+    max-width: none;
+  }
+
+  .copy--01 h2 {
+    font-size: 25px;
+  }
+
+  .copy--01 p {
+    font-size: 15px;
   }
 
   .overlap-02 {
@@ -994,11 +1049,11 @@ a {
 
   .beach-hero__copy p:not(.beach-hero__lead) {
     max-width: none;
-    font-size: 13px;
+    font-size: 15px;
     line-height: 2;
   }
 
-  .beach-hero__copy p + p {
+  .beach-hero__copy p+p {
     margin-top: 6px;
   }
 
@@ -1058,8 +1113,22 @@ a {
   }
 
   .bleed--05-bottom {
+    width: calc(100% - var(--pad-x) * 2);
     height: auto;
-    aspect-ratio: 16 / 5;
+    aspect-ratio: 1000 / 351;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .bleed--05-bottom img {
+    height: 100%;
+  }
+
+  .fujisan-caption {
+    right: 10px;
+    bottom: 10px;
+    max-width: calc(100% - 20px);
+    font-size: 12px;
   }
 
   .grid-07 {
@@ -1105,17 +1174,12 @@ a {
   }
 
   .copy h2 {
-    font-size: 26px;
+    font-size: 25px;
   }
 }
 
 /* Scale down proportionally on medium desktops */
 @media (max-width: 1252px) and (min-width: 769px) {
-  .layout-01 {
-    grid-template-columns: 30% 1fr;
-    gap: 3%;
-  }
-
   .layout-02 {
     grid-template-columns: 42% 1fr;
   }
